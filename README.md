@@ -25,7 +25,15 @@
 GET /profile/<username>
 ```
 
-Request
+Return the user profile data whose username was sent like a parameter
+STATUS 404 NOT FOUND will be returned if there is no user with the specified username in the system
+
+Curl example
+
+```bash
+curl http://localhost:8000/profile/Daniel
+   -H "Accept: application/json"
+```
 
 | Parameter  | Type     | Description                   |
 | :--------- | :------- | :---------------------------- |
@@ -35,13 +43,24 @@ Request
 POST /user/
 ```
 
-Insertes a new user in the system. If the user was created successfully, data with
+Inserts a new user in the system. If the user was created successfully, data with all the information will be returned.
+STATUS 409 CONFLICT will be returned if there is a conflict with the current data in the system.
+STATUS 400 BAD REQUEST will be return if any parameter is missing or not valid.
+
+Curl example
+
+```bash
+curl -X POST http://localhost:8000/user
+   -H 'Content-Type: application/json'
+   -H 'Accept: application/json'
+   -d '{"userName":"Daniel","lastName":"Sanchez","emailAddress":"username@example.com","phoneNumber":"+34987506937","hobbies":"Document APIs in README.md files."}'
+```
 
 | Parameter      | Type     | Description                                              |
 | :------------- | :------- | :------------------------------------------------------- |
-| `username`     | `string` | **Required**. Unique username                            |
+| `username`     | `string` | **Required**. Unique username. Minumum 4 characters long |
 | `lastName`     | `string` | **Required**. Last name                                  |
-| `emailAddress` | `string` | **Required**. full email address                         |
+| `emailAddress` | `string` | **Required**. Valid full email address                   |
 | `phoneNumber`  | `string` | **Required**. Phone number including country prefix      |
 | `hobbies`      | `string` | **Optional**. User hobbies description. Empty by default |
 

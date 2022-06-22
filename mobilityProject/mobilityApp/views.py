@@ -48,7 +48,7 @@ def createUser(request):
         return Response(data={'detail':'userName must have, at least, 4 chracters'},
         status=status.HTTP_400_BAD_REQUEST)
     
-    if not request.data['lastName'] == '':
+    if request.data['lastName'] == '':
         return Response(data={'detail':'lastName cannot be empty'},
         status=status.HTTP_400_BAD_REQUEST)
 
@@ -63,7 +63,7 @@ def createUser(request):
         try:
             serializer.save()
         except IntegrityError as e: 
-            return Response(data={'detail':'Conflict in data introduced: ' + e.__cause__},
+            return Response(data={'detail':'Conflict in data introduced: ' + str(e.__cause__)},
             status=status.HTTP_409_CONFLICT)
 
         if not settings.DEBUG: # Send validation email and SMS only from production env
