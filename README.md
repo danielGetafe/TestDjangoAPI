@@ -11,13 +11,16 @@
 5. Create a new virtualenv called `venv`: `python -m venv venv`.
 6. Set the local virtualenv to `venv`: `source venv\bin\activate`.
 7. Install requirements.txt packages: `pip install -r requirements.txt`
-8. Install RabbitMQ: `sudo apt-get install rabbitmq-server`
 
 ## For production environment
 
 1. Rename settings.py to settings-local.py
 2. Rename settings-production.py to settings.py
 3. Create SECRET_KEY environment variable: `export SECRET_KEY="django-insecure-u0xhq*ch1u@&p1r2r&=$u07nbyj&@i0tr(u#uzqocqx(nwd+q7"`
+
+## Project description
+
+This REST API developed using Django the the REST Framework has only 2 endpoints, one to sign up new users and another one to display saved user fields details
 
 ## API endpoints
 
